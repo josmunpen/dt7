@@ -1,0 +1,9 @@
+		<security:intercept-url pattern="/complaint/customer/show.do" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/complaint/customer/list.do" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')"
+
+		<security:intercept-url pattern="/note/customer/**" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/note/customer/list.do" access="hasRole('CUSTOMER')" /> 		
+		<security:intercept-url pattern="/note/customer/show.do" access="hasRole('CUSTOMER')" /> 		
+		<security:intercept-url pattern="/note/customer/edit.do" access="hasRole('CUSTOMER')" />	
+		<security:intercept-url pattern="/note/customer/create.do" access="hasRole('CUSTOMER')" />

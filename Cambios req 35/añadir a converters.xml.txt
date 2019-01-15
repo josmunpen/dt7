@@ -1,0 +1,8 @@
+		<bean class="converters.CustomerToStringConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		
+		<bean class="converters.RefereeToStringConverter" />
+		<bean class="converters.StringToRefereeConverter" />
+		
+		<bean class="converters.HandyWorkerToStringConverter" />
+		<bean class="converters.StringToHandyWorkerConverter" />

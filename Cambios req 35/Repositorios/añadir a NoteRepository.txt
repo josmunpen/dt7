@@ -1,0 +1,5 @@
+	//35.2
+	@Query("select n from Note n where n.customer.id =?1")
+	public Collection<Note> findByCustomerId(Integer id);
+
+}

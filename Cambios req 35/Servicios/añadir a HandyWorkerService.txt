@@ -1,0 +1,3 @@
+	public HandyWorker findOne(final int id) {
+		return this.handyWorkerRepository.findOne(id);
+	}

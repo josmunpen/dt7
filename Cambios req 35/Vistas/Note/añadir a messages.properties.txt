@@ -1,0 +1,4 @@
+note.commit.error = Errors
+
+///////////////////Actualizar la siguiente:
+note.edit = Edit note

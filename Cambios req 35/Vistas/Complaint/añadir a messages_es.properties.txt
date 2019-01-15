@@ -1,0 +1,2 @@
+complaint.title = Lista de quejas
+complaint.fixUpTask = Tarea

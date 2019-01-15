@@ -1,0 +1,5 @@
+//////////////EN HASROLE('CUSTOMER')/////////////
+(intercambiar por la existente si existe)
+
+<li><a href="complaint/customer/list.do"><spring:message code="master.page.complaints" /></a></li>
+<li><a href="note/customer/list.do"><spring:message code="master.page.notes" /></a></li>		

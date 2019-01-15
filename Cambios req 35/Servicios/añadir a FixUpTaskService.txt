@@ -1,0 +1,3 @@
+	public Collection<FixUpTask> findByCustomerId(final Integer cId) {
+		return this.fixUpTaskRepository.findByCustomerId(cId);
+	}

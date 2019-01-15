@@ -1,0 +1,2 @@
+	@Query("select f from Customer c join c.fixUpTasks f where c.id=?1")
+	Collection<FixUpTask> findByCustomerId(Integer cId);

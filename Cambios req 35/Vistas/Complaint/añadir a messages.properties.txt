@@ -1,0 +1,2 @@
+complaint.title = Complaint List
+complaint.fixUpTask = FixUpTask
