@@ -7,3 +7,8 @@
 		<security:intercept-url pattern="/note/customer/show.do" access="hasRole('CUSTOMER')" /> 		
 		<security:intercept-url pattern="/note/customer/edit.do" access="hasRole('CUSTOMER')" />	
 		<security:intercept-url pattern="/note/customer/create.do" access="hasRole('CUSTOMER')" />
+
+		<security:intercept-url pattern="/note/referee/**" access="hasRole('REFEREE')" />
+		<security:intercept-url pattern="/note/referee/list.do" access="hasRole('REFEREE')" /> 		
+		<security:intercept-url pattern="/note/referee/edit.do" access="hasRole('REFEREE')" />	
+		<security:intercept-url pattern="/note/referee/create.do" access="hasRole('REFEREE')" />

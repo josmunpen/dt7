@@ -31,12 +31,13 @@
 	<spring:message code="note.moment" var="moment"/>
 	<display:column property="moment" title="${moment}" />
 	
-	
+	<security:authorize access="hasRole('CUSTOMER')">
 	<display:column>
 			<a href="note/customer/show.do?noteId=${row.id}"> <spring:message
 					code="note.show" />
 			</a>
 		</display:column>
+		</security:authorize>
 	</security:authorize>
 
 </display:table>

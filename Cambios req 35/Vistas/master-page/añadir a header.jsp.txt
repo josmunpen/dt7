@@ -2,4 +2,8 @@
 (intercambiar por la existente si existe)
 
 <li><a href="complaint/customer/list.do"><spring:message code="master.page.complaints" /></a></li>
-<li><a href="note/customer/list.do"><spring:message code="master.page.notes" /></a></li>		
+<li><a href="note/customer/list.do"><spring:message code="master.page.notes" /></a></li>
+
+
+//////////////EN HASROLE('REFEREE')/////////////
+<li><a href="note/referee/list.do"><spring:message code="master.page.notes" /></a></li>			
