@@ -45,8 +45,14 @@
 		<form:label path="priority">
 			<spring:message code="message.priority" />:
 		</form:label>
-		<form:input path="priority"/>
+		<form:select path="priority">
+		<form:option value="HIGH"><spring:message code="message.priority.high"/></form:option>
+		<form:option value="NEUTRAL"><spring:message code="message.priority.neutral"/></form:option>
+		<form:option value="LOW"><spring:message code="message.priority.low"/></form:option>
+		</form:select>
 		<form:errors cssClass="error" path="priority" />
+
+		<br/>
 		<br/>
 
 		</jstl:if>

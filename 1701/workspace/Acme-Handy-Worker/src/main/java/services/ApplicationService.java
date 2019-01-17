@@ -252,7 +252,7 @@ public class ApplicationService {
 		//		System.out.println("HWs: " + this.handyWorkerService.findAll());
 		//
 		//		res.setFixUpTask(futSaved);
-		if (application.getId() != 0) {
+		if (application.getId() != 0 && application.getCreditCard() != null) {
 			final CreditCard cc = res.getCreditCard();
 			final CreditCard savedCC = this.ccService.save(cc);
 			res.setCreditCard(savedCC);

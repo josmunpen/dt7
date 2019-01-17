@@ -63,6 +63,9 @@
 	<form:hidden path="fixUpTask" />
 	<form:hidden path="comment" />
 	<form:hidden path="offeredPrice"/>
+	<jstl:if test="${application.status=='pending'}">
+	<form:hidden path="creditCard"/>
+	<form:hidden path="rejectedCause"/>
 	<form:label path="status">
 	<spring:message code="application.status" />:
 	</form:label>
@@ -72,22 +75,32 @@
 			<form:option value="accepted"/>
 		</form:select>
 	<br />
+	</jstl:if>
 	
 	
 	
-	
+	<jstl:if test="${application.status=='rejected'}">
+	<form:hidden path="creditCard"/>
+	<form:hidden path="status"/>
 	<form:label path="rejectedCause">
 	<spring:message code="application.rejectedCause"/>
 	</form:label>
 	<form:input path="rejectedCause"/>
 	<form:errors cssClass="error" path="rejectedCause"/>
 	<br/>
-	<form:label path="creditCard">
+	
+	</jstl:if>
+
+<jstl:if test="${application.status=='accepted'}">
+
+<form:hidden path="status"/>
+<form:hidden path="rejectedCause"/>
+
+<form:label path="creditCard">
 	<spring:message code="application.creditCard"/>
 	</form:label>
 	<br/>
-
-<form:label path="creditCard.holderName">
+	<form:label path="creditCard.holderName">
 				<spring:message code="application.holderName" />
 			</form:label>
 			<form:input path="creditCard.holderName" />
@@ -133,7 +146,8 @@
  			</form:label> 
  			<form:input path="creditCard.CVV" type="number" /> 
 			<form:errors class="error" path="creditCard.CVV" /> 
-- 			<br>
+ 			<br>
+ 			</jstl:if>
 
 	<input type="submit" name="save"
 		value="<spring:message code="application.save" />" />&nbsp; 

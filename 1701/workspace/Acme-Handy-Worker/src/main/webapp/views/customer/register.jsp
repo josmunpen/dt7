@@ -68,7 +68,7 @@
 		<form:label path="phoneNumber">
 			<spring:message code="customer.edit.label.phoneNumber" />:
 		</form:label>
-		<form:input path="phoneNumber" onchange="check(this)" />
+		<form:input path="phoneNumber" onchange="check(this)" pattern="^(\d|\(|\)| |\+)+$"/>
 		<form:errors cssClass="error" path="phoneNumber" />
 		
 		<script language='javascript' type='text/javascript'>
