@@ -1,0 +1,130 @@
+package controllers;
+
+import java.util.Collection;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import services.CategoryService;
+import domain.Category;
+
+@Controller
+@RequestMapping("/socialProfile")
+public class SocialProfileController  extends AbstractController{
+
+
+
+		@Autowired
+		private SocialProfileService	socialProfileService;
+
+
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public ModelAndView list() {
+			ModelAndView res;
+			Collection<SocialProfile> categories;
+
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+			//final String lang2 = LocaleContextHolder.getLocale();
+
+			categories = this.socialProfileService.findAll();
+
+			res = new ModelAndView("socialProfile/list");
+			res.addObject("categories", categories);
+			res.addObject("requestURI", "socialProfile/administrator/list.do");
+			res.addObject("lang", lang);
+			return res;
+		}
+
+		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+		public ModelAndView save(@Valid final SocialProfile socialProfile, final BindingResult binding) {
+			ModelAndView result;
+
+			if (binding.hasErrors())
+				result = this.createEditModelAndView(socialProfile);
+			else
+				try {
+					this.socialProfileService.save(socialProfile);
+					result = new ModelAndView("redirect:list.do");
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(socialProfile, "socialProfile.commit.error");
+				}
+
+			return result;
+		}
+
+		@RequestMapping(value = "/create", method = RequestMethod.GET)
+		public ModelAndView create() {
+			ModelAndView res;
+			SocialProfile socialProfile;
+
+			socialProfile = this.socialProfileService.create();
+
+			res = this.createEditModelAndView(socialProfile);
+
+			return res;
+		}
+
+		@RequestMapping(value = "/edit", method = RequestMethod.GET)
+		public ModelAndView edit(@RequestParam final int socialProfileId) {
+			ModelAndView result;
+			SocialProfile socialProfile;
+
+			socialProfile = this.socialProfileService.findOne(socialProfileId);
+			Assert.notNull(socialProfile);
+			result = this.createEditModelAndView(socialProfile);
+
+			return result;
+		}
+
+		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+		public ModelAndView delete(final SocialProfile socialProfile, final BindingResult binding) {
+			ModelAndView result;
+
+			try {
+				this.socialProfileService.delete(socialProfile);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(socialProfile, "socialProfile.commit.error");
+			}
+
+			return result;
+		}
+
+		protected ModelAndView createEditModelAndView(final SocialProfile socialProfile) {
+			ModelAndView result;
+
+			result = this.createEditModelAndView(socialProfile, null);
+
+			return result;
+
+		}
+
+		protected ModelAndView createEditModelAndView(final SocialProfile socialProfile, final String message) {
+			ModelAndView result;
+			Collection<SocialProfile> parentCategories;
+			parentCategories = this.socialProfileService.findAll();
+			Collection<SocialProfile> parentCategoriesSinHijas;
+			parentCategoriesSinHijas = this.socialProfileService.findAll();
+
+			//Se muestran todas menos las hijas
+			for (final SocialProfile c : parentCategories)
+				if (c.getParentSocialProfile().equals(socialProfile))
+					parentCategoriesSinHijas.remove(c);
+
+			result = new ModelAndView("socialProfile/edit");
+			result.addObject("socialProfile", socialProfile);
+			result.addObject("parentCategories", parentCategoriesSinHijas);
+			result.addObject("message", message);
+
+			return result;
+		}
+}

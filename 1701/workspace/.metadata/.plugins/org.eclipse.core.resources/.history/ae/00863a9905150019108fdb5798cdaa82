@@ -1,0 +1,127 @@
+
+package controllers.administrator;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import services.ApplicationService;
+import services.CustomerService;
+import services.FixUpTaskService;
+import services.HandyWorkerService;
+import services.ReportService;
+import controllers.AbstractController;
+import domain.Customer;
+import domain.HandyWorker;
+
+@Controller
+@RequestMapping("dashboard/administrator")
+public class DashboardAdministratorController extends AbstractController {
+
+	@Autowired
+	ApplicationService	applicationService;
+
+	@Autowired
+	FixUpTaskService	fixUpTaskService;
+
+	@Autowired
+	CustomerService		customerService;
+
+	@Autowired
+	HandyWorkerService	hwService;
+
+	@Autowired
+	ReportService		reportService;
+
+
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public ModelAndView dashboard() {
+		final ModelAndView res;
+		res = new ModelAndView("administrator/dashboard");
+		//C-Level queries
+		final String[] fixUpTaskPerUser = this.customerService.fixUpTasksStatistics().split(",");
+
+		res.addObject("avgFixUpTask", fixUpTaskPerUser[0].trim());
+		res.addObject("minFixUpTask", fixUpTaskPerUser[1].trim());
+		res.addObject("maxFixUpTask", fixUpTaskPerUser[2].trim());
+		res.addObject("stdevFixUpTask", fixUpTaskPerUser[3].trim());
+
+		final String[] applicationsPerFixUpTask = this.fixUpTaskService.applicationsStatistics().split(",");
+
+		res.addObject("avgApp", applicationsPerFixUpTask[0].trim());
+		res.addObject("minApp", applicationsPerFixUpTask[1].trim());
+		res.addObject("maxApp", applicationsPerFixUpTask[2].trim());
+		res.addObject("stdevApp", applicationsPerFixUpTask[3].trim());
+
+		final String[] pricePerFixUpTask = this.fixUpTaskService.maximunPriceStatistics().split(",");
+
+		res.addObject("avgPrice", pricePerFixUpTask[0].trim());
+		res.addObject("minPrice", pricePerFixUpTask[1].trim());
+		res.addObject("maxPrice", pricePerFixUpTask[2].trim());
+		res.addObject("stdevPrice", pricePerFixUpTask[3].trim());
+
+		final String[] pricePerApplication = this.applicationService.offeredPriceStatisctics().split(",");
+
+		res.addObject("avgOffPrice", pricePerApplication[0].trim());
+		res.addObject("minOffPrice", pricePerApplication[1].trim());
+		res.addObject("maxOffPrice", pricePerApplication[2].trim());
+		res.addObject("stdevOffPrice", pricePerApplication[3].trim());
+
+		final Double pendingApplicationsRatio = this.applicationService.pendingApplications();
+
+		res.addObject("pendingApplications", pendingApplicationsRatio);
+
+		final Double rejectedApplicationsRatio = this.applicationService.rejectedApplications();
+
+		res.addObject("rejectedApplications", rejectedApplicationsRatio);
+
+		final Double acceptedApplicationsRatio = this.applicationService.acceptedApplications();
+
+		res.addObject("acceptedApplicationsRatio", acceptedApplicationsRatio);
+
+		final Double elapsedApplicationsRatio = this.applicationService.elapsedApplications();
+
+		res.addObject("elapsedApplicationsRatio", elapsedApplicationsRatio);
+
+		final Collection<Customer> moreFixUpTasks = this.customerService.customersWithMoreFixUpTasks();
+
+		res.addObject("moreFixUpTasks", moreFixUpTasks);
+
+		final Collection<HandyWorker> moreApplications = this.hwService.handyWorkersWithMoreApplications();
+
+		res.addObject("moreApplications", moreApplications);
+
+		/*
+		 * //B-Level queries
+		 * final ArrayList<Object> complaintStatictics = this.fixUpTaskService.complaintsStatistics();
+		 * 
+		 * res.addObject("avgComplaints", complaintStatictics.get(0));
+		 * res.addObject("minComplaints", complaintStatictics.get(1));
+		 * res.addObject("maxComplaints", complaintStatictics.get(2));
+		 * res.addObject("stdevComplaints", complaintStatictics.get(3));
+		 * 
+		 * final ArrayList<Object> noteStatictics = this.reportService.notesStatistics();
+		 * 
+		 * res.addObject("avgNotes", noteStatictics.get(0));
+		 * res.addObject("minNotes", noteStatictics.get(1));
+		 * res.addObject("maxNotes", noteStatictics.get(2));
+		 * res.addObject("stdevNotes", noteStatictics.get(3));
+		 * 
+		 * final Double ratioComplaints = this.fixUpTaskService.fixUpTasksWithComplaints();
+		 * 
+		 * res.addObject("ratioComplaints", ratioComplaints);
+		 * 
+		 * final Collection<Customer> top3CustomerComplaints = this.customerService.topThreeCustomersbyComplaints();
+		 * res.addObject("top1CustomerComplaints", top3CustomerComplaints);
+		 * 
+		 * final Collection<HandyWorker> top3HandyWorkerComplaints = this.hwService.topThreeHandyWorkersByComplaints();
+		 * res.addObject("top3HandyWorkerComplaints", top3HandyWorkerComplaints);
+		 */
+		return res;
+
+	}
+}

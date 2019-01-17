@@ -1,0 +1,17 @@
+127.0.0.1 - - [09/Jan/2019:14:46:32 +0100] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Jan/2019:14:47:27 +0100] "GET /Acme-Handy-Worker/ HTTP/1.1" 200 2382
+127.0.0.1 - - [09/Jan/2019:14:47:30 +0100] "GET /favicon.ico HTTP/1.1" 404 973
+127.0.0.1 - - [09/Jan/2019:14:47:40 +0100] "GET /Acme-Handy-Worker/security/login.do HTTP/1.1" 200 2692
+127.0.0.1 - - [09/Jan/2019:14:47:51 +0100] "POST /Acme-Handy-Worker/j_spring_security_check HTTP/1.1" 302 -
+127.0.0.1 - - [09/Jan/2019:14:47:51 +0100] "GET /Acme-Handy-Worker/ HTTP/1.1" 200 2633
+127.0.0.1 - - [09/Jan/2019:14:47:59 +0100] "GET /Acme-Handy-Worker/customer/customer/edit.do HTTP/1.1" 200 5172
+127.0.0.1 - - [09/Jan/2019:14:48:16 +0100] "POST /Acme-Handy-Worker/customer/customer/edit.do HTTP/1.1" 302 -
+127.0.0.1 - - [09/Jan/2019:14:48:16 +0100] "GET /Acme-Handy-Worker HTTP/1.1" 302 -
+127.0.0.1 - - [09/Jan/2019:14:48:16 +0100] "GET /Acme-Handy-Worker/ HTTP/1.1" 200 2633
+127.0.0.1 - - [09/Jan/2019:14:51:20 +0100] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [09/Jan/2019:15:09:31 +0100] "GET /Acme-Handy-Worker/j_spring_security_logout HTTP/1.1" 302 -
+127.0.0.1 - - [09/Jan/2019:15:09:35 +0100] "GET /Acme-Handy-Worker/ HTTP/1.1" 200 2382
+127.0.0.1 - - [09/Jan/2019:15:09:43 +0100] "GET /Acme-Handy-Worker/security/login.do HTTP/1.1" 200 2692
+127.0.0.1 - - [09/Jan/2019:15:09:55 +0100] "POST /Acme-Handy-Worker/j_spring_security_check HTTP/1.1" 302 -
+127.0.0.1 - - [09/Jan/2019:15:09:55 +0100] "GET /Acme-Handy-Worker/ HTTP/1.1" 200 2645
+127.0.0.1 - - [09/Jan/2019:15:10:02 +0100] "GET /Acme-Handy-Worker/handyworker/handyworker/edit.do HTTP/1.1" 200 5435

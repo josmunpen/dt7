@@ -1,0 +1,29 @@
+
+package converters;
+
+import java.net.URLEncoder;
+
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import domain.Category;
+import domain.CreditCard;
+
+@Component
+@Transactional
+public class CreditCardToStringConverter implements Converter<CreditCard, String> {
+
+
+		@Override
+		public String convert(final Category category) {
+			String res;
+
+			if (category == null)
+				res = null;
+			else
+				res = String.valueOf(category.getId());
+			//res = String.valueOf(category);
+			return res;
+		}
+}

@@ -1,0 +1,16 @@
+
+social.nick 				= Name
+social.socialNetwork		= Social network
+social.link					= link
+
+social.edit			 	= Edit
+social.delete			 	= Delete
+social.edit.link		 	= Edit
+social.delete.link	 	= Delete
+social.list.create		= New social
+social.save				= Save
+social.cancel				= Cancel
+
+
+social.commit.error	= Errors
+social.confirm.delete		= Delete this social profile?

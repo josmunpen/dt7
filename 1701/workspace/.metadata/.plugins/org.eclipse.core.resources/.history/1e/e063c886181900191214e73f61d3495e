@@ -1,0 +1,57 @@
+
+package services;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import repositories.SocialProfileRepository;
+import domain.SocialProfile;
+
+@Service
+@Transactional
+public class SocialProfileService {
+
+	@Autowired
+	public SocialProfileRepository	socialProfileRepository;
+
+
+	//12.3
+	public SocialProfile create() {
+
+		final SocialProfile result = new SocialProfile();
+
+		result.setLink("");
+		result.setNick("");
+		result.setSocialNetwork("");
+
+		return result;
+	}
+	public SocialProfile save(final SocialProfile socialProfile) {
+
+		Assert.notNull(socialProfile);
+
+		SocialProfile res;
+		res = this.socialProfileRepository.save(socialProfile);
+		return res;
+	}
+
+	public void delete(final SocialProfile category) {
+
+		Assert.notNull(category);
+		Assert.isTrue(category.getId() != 0);
+
+		this.socialProfileRepository.delete(category);
+
+	}
+	public Collection<SocialProfile> findAll() {
+		return this.socialProfileRepository.findAll();
+	}
+
+	public SocialProfile findOne(final int categoryId) {
+		return this.socialProfileRepository.findOne(categoryId);
+	}
+}
